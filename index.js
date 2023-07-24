@@ -3,7 +3,7 @@ const sharp = require("sharp");
 const ssim = require("ssim");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 // Middleware to parse JSON body
 app.use(express.json());
@@ -30,38 +30,17 @@ function compareImages(imageBuffer, database) {
 
 // Sample image database (add your own images here)
 const imageDatabase = [
-  { path: "assets/bait2", buffer: sharp("assets/bait2").toBuffer() },
-  {
-    path: "https://ae01.alicdn.com/kf/H71bf36b8d46941b9adaec4b9bad2ea50g/Wireless-wifi-router-vpn-300mbps-repetidor-de-firewall-um-clique-wps-wds-4-sid-porta-ethernet.jpg",
-    buffer: sharp(
-      "https://ae01.alicdn.com/kf/H71bf36b8d46941b9adaec4b9bad2ea50g/Wireless-wifi-router-vpn-300mbps-repetidor-de-firewall-um-clique-wps-wds-4-sid-porta-ethernet.jpg"
-    ).toBuffer(),
-  },
-  {
-    path: "https://img.etimg.com/photo/msid-100191616/tp-link-n300.jpg",
-    buffer: sharp(
-      "https://img.etimg.com/photo/msid-100191616/tp-link-n300.jpg"
-    ).toBuffer(),
-  },
-  {
-    path: "https://img.etimg.com/photo/msid-100191616/tp-link-n300.jpg",
-    buffer: sharp(
-      "https://img.etimg.com/photo/msid-100191616/tp-link-n300.jpg"
-    ).toBuffer(),
-  },
-  {
-    path: "https://media.wired.com/photos/6311133e567860ab6c66c672/4:3/w_1888,h_1416,c_limit/Synology-RT6600ax-Gear.jpg",
-    buffer: sharp(
-      "https://media.wired.com/photos/6311133e567860ab6c66c672/4:3/w_1888,h_1416,c_limit/Synology-RT6600ax-Gear.jpg"
-    ).toBuffer(),
-  },
-  { path: "assets/bait3", buffer: sharp("assets/bait3").toBuffer() },
+  { path: "assets/bait2.jpg", buffer: sharp("assets/bait2.jpg").toBuffer() },
+  { path: "assets/real.webp", buffer: sharp("assets/real.webp").toBuffer() },
+  { path: "assets/real1.webp", buffer: sharp("assets/real1.webp").toBuffer() },
+  { path: "assets/real3.jpg", buffer: sharp("assets/real3.jpg").toBuffer() },
+  { path: "assets/rg1200.jpg", buffer: sharp("assets/rg1200.jpg").toBuffer() },
 
   // Add more images to the database as needed
 ];
 
 // Route to compare images
-app.post("/api/compare_images", async (req, res) => {
+app.post("/api/compareImages", async (req, res) => {
   try {
     const { image_data, target_width, target_height } = req.body;
     const imageBuffer = Buffer.from(image_data, "base64");
